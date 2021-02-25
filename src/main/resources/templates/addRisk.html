@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add Risk</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Welcome User !!</h1>
+    <h2> Add your Risk Here</h2>
+</div>
+
+
+<form th:action="@{/riskSuccess}" method="post"
+      th:object="${riskObj}">
+    <div style="display:flex;flex-direction: column;padding: 80px">
+        <div class="form-group row">
+            <label>Risk Title </label>
+            <input type="text" class="form-control" th:field="*{risk_title}"/>
+        </div>
+
+        <div class="form-group row">
+            <label>Risk Keyword</label>
+            <input type="text" class="form-control" th:field="*{risk_keyword}"/>
+        </div>
+
+        <div class="form-group row">
+            <label>Risk Regex</label>
+            <input type="text" class="form-control"  th:field="*{risk_regex}"/>
+        </div>
+
+        <div class="form-group row">
+            <label>Risk Description</label>
+            <input type="text" class="form-control"  th:field="*{risk_Description}"/>
+        </div>
+
+        <div class="form-group row">
+            <label>Match Count</label>
+            <input type="text" class="form-control"  th:field="*{match_count}"/>
+        </div>
+
+        <div >
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+
+</form>
+
+
+</body>
+</html>

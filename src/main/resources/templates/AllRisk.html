@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add Risk</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Welcome User !!</h1>
+    <h2> Add your Risk Here</h2>
+</div>
+
+
+<table>
+    <thead>
+    <tr>
+        <th> Risk Id</th>
+        <th>Risk Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="getRisk : ${getAllRisk}">
+        <td th:text="${getRisk.risk_id}">Risk Id   </td>
+        <br>
+        <br>
+        <td th:text="${getRisk.risk_title}">Risk Title</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
