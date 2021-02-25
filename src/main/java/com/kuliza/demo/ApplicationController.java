@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -34,6 +35,9 @@ public class ApplicationController {
 
                 @Autowired
                 private UserPolicyRepository policyRepo;
+
+                @Autowired
+                private UserRiskSessionRepository userRiskSessionRepo;
 
             public ApplicationController() throws FileNotFoundException {
             }
@@ -56,7 +60,6 @@ public class ApplicationController {
             public String showRegistrationForm(Model model) {
                     userDetails ud=new userDetails();
                     model.addAttribute("user",ud);
-
                 return "registration_form";
             }
 
@@ -81,9 +84,10 @@ public class ApplicationController {
 
                        @GetMapping("/risk_policy")
                        public String addRiskPolicy()
-            {
-                return "rp";
-            }
+
+                     {
+                         return "rp";
+                     }
 
             /*
                     ADDING THE RISK ..................
@@ -103,10 +107,27 @@ public class ApplicationController {
                 @PostMapping("/riskSuccess")
                 public String riskAddSuccessfully(@AuthenticationPrincipal UserDetails ud, Risk_Details riskdetails, Model model)
                 {
+
+                    UserRiskLogs url=new UserRiskLogs();
                     userDetails userdetails1=  repo.findByUser_name(ud.getUsername());
-                    CustomUserDetails cd=new CustomUserDetails(userdetails1);
                     riskdetails.setUser(userdetails1);
+
                     riskRepo.save(riskdetails);
+
+                    url.setRisk_id(riskdetails.getRisk_id());
+                    System.out.println("This is current risk id "+riskdetails.getRisk_id());
+
+                    System.out.println("This is the risk logs risk id "+url.getRisk_id());
+
+                    url.setRisk_title(riskdetails.getRisk_title());
+
+                    System.out.println("This is the risk logs current risk title "+url.getRisk_title());
+                    url.setDate(java.time.LocalDate.now().toString());
+                    System.out.println("This is the risk logs current risk date "+url.getDate());
+                    url.setTime(java.time.LocalTime.now().toString());
+
+                    System.out.println("This is the risk logs current risk time "+url.getTime());
+                    userRiskSessionRepo.save(url);
 
                     UserPolicy up=new UserPolicy();
                     List<Risk_Details> getRisk=riskRepo.findAllRisk(ud.getUsername());
