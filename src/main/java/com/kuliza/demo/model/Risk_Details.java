@@ -1,4 +1,6 @@
-package com.kuliza.demo;
+package com.kuliza.demo.model;
+
+import com.kuliza.demo.model.userDetails;
 
 import javax.persistence.*;
 

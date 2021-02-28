@@ -1,5 +1,8 @@
-package com.kuliza.demo;
+package com.kuliza.demo.service;
 
+import com.kuliza.demo.model.userDetails;
+import com.kuliza.demo.repository.UserRepository;
+import com.kuliza.demo.service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

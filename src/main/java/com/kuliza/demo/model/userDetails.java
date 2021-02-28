@@ -1,7 +1,7 @@
-package com.kuliza.demo;
+package com.kuliza.demo.model;
+
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 

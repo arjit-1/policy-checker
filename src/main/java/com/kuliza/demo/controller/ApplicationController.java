@@ -1,5 +1,7 @@
-package com.kuliza.demo;
+package com.kuliza.demo.controller;
 
+import com.kuliza.demo.model.*;
+import com.kuliza.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,8 +18,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -37,7 +37,10 @@ public class ApplicationController {
                 private UserPolicyRepository policyRepo;
 
                 @Autowired
-                private UserRiskSessionRepository userRiskSessionRepo;
+                private UserRiskLogsRepository userRiskSessionRepo;
+
+                @Autowired
+                private UserPolicyLogsRepository userPolicyLogsRepo;
 
             public ApplicationController() throws FileNotFoundException {
             }
@@ -94,11 +97,12 @@ public class ApplicationController {
              */
 
                        @GetMapping("/risk")
-                       public String addRiskDetails(Model model) {
+                       public String addRiskDetails(Model model)
+                       {
                         Risk_Details rd=new Risk_Details();
                         model.addAttribute("riskObj",rd);
                         return "addRisk";
-            }
+                       }
 
             /*
                     POST SUCCESSFUL ADDITION OF RISK ..................
@@ -111,22 +115,12 @@ public class ApplicationController {
                     UserRiskLogs url=new UserRiskLogs();
                     userDetails userdetails1=  repo.findByUser_name(ud.getUsername());
                     riskdetails.setUser(userdetails1);
-
                     riskRepo.save(riskdetails);
 
                     url.setRisk_id(riskdetails.getRisk_id());
-                    System.out.println("This is current risk id "+riskdetails.getRisk_id());
-
-                    System.out.println("This is the risk logs risk id "+url.getRisk_id());
-
                     url.setRisk_title(riskdetails.getRisk_title());
-
-                    System.out.println("This is the risk logs current risk title "+url.getRisk_title());
                     url.setDate(java.time.LocalDate.now().toString());
-                    System.out.println("This is the risk logs current risk date "+url.getDate());
                     url.setTime(java.time.LocalTime.now().toString());
-
-                    System.out.println("This is the risk logs current risk time "+url.getTime());
                     userRiskSessionRepo.save(url);
 
                     UserPolicy up=new UserPolicy();
@@ -149,6 +143,14 @@ public class ApplicationController {
                     String name=ud.getUsername();
                     up.setUser_name(ud.getUsername());
                     policyRepo.save(up);
+
+                    UserPolicyLogs upl=new UserPolicyLogs();
+                    upl.setDate(java.time.LocalDate.now()+"");
+                    upl.setTime(java.time.LocalTime.now()+"");
+                    upl.setPolicy_name(up.getPolicy_name());
+                    upl.setRisk_acc(up.getRisk_Data());
+
+                    userPolicyLogsRepo.save(upl);
 
                     return "rp";
                 }

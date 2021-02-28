@@ -1,4 +1,4 @@
-package com.kuliza.demo;
+package com.kuliza.demo.implementations;
 
 import java.util.*;
 import java.util.regex.Matcher;

@@ -1,11 +1,18 @@
-package com.kuliza.demo;
+package com.kuliza.demo.controller;
 
+import com.kuliza.demo.implementations.CheckRegex;
+import com.kuliza.demo.model.Risk_Details;
+import com.kuliza.demo.model.UserPolicy;
+import com.kuliza.demo.model.UserTestingLogs;
+import com.kuliza.demo.repository.RiskRepository;
+import com.kuliza.demo.repository.UserPolicyRepository;
+import com.kuliza.demo.repository.UserRepository;
+import com.kuliza.demo.repository.UserTestingLogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +35,8 @@ public class newCon {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private UserTestingLogsRepository userTestingLogsRepo;
 
     String violatedPolicy=null;
 
@@ -49,6 +58,7 @@ public class newCon {
         br.close();
 
         System.out.println(".......");
+        System.out.println("Content of the testing docuement ");
         List<String> words=Arrays.asList(str1.split(" "));
         for(String s:words) System.out.println(s);
         System.out.println(".......");
@@ -81,7 +91,6 @@ public class newCon {
                     String strRegex=rd.getRisk_regex();
                     List<String> riskKey= Arrays.asList(str.split(","));
                     List<String> regexKey=Arrays.asList(strRegex.split(","));
-                    for(String s:regexKey) System.out.println(s);
 //
                     for(String s:riskKey)
                     {
@@ -90,14 +99,18 @@ public class newCon {
                     }
                     for(String s:regexKey)
                     {
-                        //System.out.println(s);
                         cnt1+=cr.checkR(s,map);
                     }
-                    System.out.println(cnt1);
 
                     if(cnt1>=rd.getMatch_count()) {
                         System.out.println("Risk With id "+rd.getRisk_id()+" exceed the match count thus policy with policy name "+up1.getPolicy_name()+" is violated");
                         violatedPolicy=violatedPolicy+up1.getPolicy_name()+",";
+                        UserTestingLogs utl=new UserTestingLogs();
+                        utl.setRisk_id(rd.getRisk_id());
+                        utl.setPolicy_name(up1.getPolicy_name());
+                        utl.setDate(java.time.LocalDate.now()+"");
+                        utl.setTime(java.time.LocalTime.now()+"");
+                        userTestingLogsRepo.save(utl);
 
                     }
                     else System.out.println("No risk exceed the match count with risk id "+rd.getRisk_id());

@@ -1,28 +1,34 @@
-package com.kuliza.demo;
+package com.kuliza.demo.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name="user_risk_logs")
-public class UserRiskLogs {
+@Table(name="user_policy_logs")
+public class UserPolicyLogs {
 
     @Id
-    @Column(name="session_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long session_id;
 
     @Column(name="date")
     private String date;
 
-    @Column(name="time")
+    @Column
     private String time;
 
-    @Column(name="risk_id")
-    private Long risk_id;
+    @Column(name="policy_name")
+    private String policy_name;
 
-    @Column(name="risk_title")
-    private String risk_title;
+    @Column(name="risk_acc")
+    private String risk_acc;
+
+    public String getPolicy_name() {
+        return policy_name;
+    }
+
+    public void setPolicy_name(String policy_name) {
+        this.policy_name = policy_name;
+    }
 
     public Long getSession_id() {
         return session_id;
@@ -48,19 +54,11 @@ public class UserRiskLogs {
         this.time = time;
     }
 
-    public Long getRisk_id() {
-        return risk_id;
+    public String getRisk_acc() {
+        return risk_acc;
     }
 
-    public void setRisk_id(Long risk_id) {
-        this.risk_id = risk_id;
-    }
-
-    public String getRisk_title() {
-        return risk_title;
-    }
-
-    public void setRisk_title(String risk_title) {
-        this.risk_title = risk_title;
+    public void setRisk_acc(String risk_acc) {
+        this.risk_acc = risk_acc;
     }
 }

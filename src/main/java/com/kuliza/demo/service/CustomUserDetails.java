@@ -1,5 +1,6 @@
-package com.kuliza.demo;
+package com.kuliza.demo.service;
 
+import com.kuliza.demo.model.userDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
