@@ -195,6 +195,14 @@ public class ApplicationController {
                     SHOWING ALL THE POLICIES............
                  */
 
+                @RequestMapping("/showPolicies")
+                public String showPolicies(Model model,@AuthenticationPrincipal UserDetails ud)
+                {
+                    List<UserPolicy> listPolicy=policyRepo.getEveryPolicy(ud.getUsername());
+                    model.addAttribute("getAllPolicy",listPolicy);
+                    return "AllPolicies";
+                }
+
                 @RequestMapping("/upload")
                 public String upload(Model model,@RequestParam("files") MultipartFile[] files) {
                     StringBuilder fileNames = new StringBuilder();
