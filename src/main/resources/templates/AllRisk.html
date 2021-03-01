@@ -23,10 +23,8 @@
     </thead>
     <tbody>
     <tr th:each="getRisk : ${getAllRisk}">
-        <td th:text="${getRisk.risk_id}">Risk Id   </td>
-        <br>
-        <br>
-        <td th:text="${getRisk.risk_title}">Risk Title</td>
+        <td th:height="50px" th:width="100px" th:text="${getRisk.risk_id}">Risk Id   </td>
+        <td th:width="50px" th:height="50px" th:text="${getRisk.risk_title}">Risk Title</td>
     </tr>
     </tbody>
 </table>

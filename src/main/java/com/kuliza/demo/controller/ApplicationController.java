@@ -179,6 +179,10 @@ public class ApplicationController {
                     return "upload";
                 }
 
+                /*
+                    SHOWING ALL THE RISK TO THE USER......
+                 */
+
                 @RequestMapping("/showRisk")
                 public String showRisk(Model model, @AuthenticationPrincipal UserDetails ud)
                 {
@@ -186,6 +190,10 @@ public class ApplicationController {
                     model.addAttribute("getAllRisk",listRisk);
                     return "AllRisk";
                 }
+
+                /*
+                    SHOWING ALL THE POLICIES............
+                 */
 
                 @RequestMapping("/upload")
                 public String upload(Model model,@RequestParam("files") MultipartFile[] files) {
