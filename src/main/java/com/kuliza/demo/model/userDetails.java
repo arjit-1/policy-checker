@@ -21,16 +21,6 @@ public class userDetails {
 
      @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
      List<Risk_Details> riskDetails=new ArrayList<>();
-//
-//
-//
-//    public List<Risk_Details> getRiskDetails() {
-//        return riskDetails;
-//    }
-//
-//    public void setRiskDetails(List<Risk_Details> riskDetails) {
-//        this.riskDetails = riskDetails;
-//    }
 
     public String getUser_name() {
         return user_name;

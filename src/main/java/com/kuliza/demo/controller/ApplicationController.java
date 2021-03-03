@@ -42,6 +42,9 @@ public class ApplicationController {
                 @Autowired
                 private UserPolicyLogsRepository userPolicyLogsRepo;
 
+    @Autowired
+    private UserTestingLogsRepository userTestingLogsRepo;
+
             public ApplicationController() throws FileNotFoundException {
             }
 
@@ -204,11 +207,11 @@ public class ApplicationController {
                 }
 
                 @RequestMapping("/upload")
-                public String upload(Model model,@RequestParam("files") MultipartFile[] files) {
+                public String upload(Model model,@RequestParam("files") MultipartFile[] files,@AuthenticationPrincipal UserDetails ud) {
                     StringBuilder fileNames = new StringBuilder();
                     for (MultipartFile file : files) {
                         Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
-                        fileNames.append(file.getOriginalFilename()+" ");
+                        fileNames.append(file.getOriginalFilename()+ud.getUsername());
                         try {
                             Files.write(fileNameAndPath, file.getBytes());
                         } catch (IOException e) {
@@ -218,6 +221,15 @@ public class ApplicationController {
                     model.addAttribute("msg", "Successfully uploaded files "+fileNames.toString());
                     return "uploadS";
                 }
+
+
+    @RequestMapping("/showResult")
+    public String showR(Model model,@AuthenticationPrincipal UserDetails ud)
+    {
+        List<UserTestingLogs> userTestingLogs=userTestingLogsRepo.findAll();
+        model.addAttribute("showRe",userTestingLogs);
+        return "ShowResult";
+    }
 
 
 

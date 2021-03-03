@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Show Results</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Welcome User !!</h1>
+    <h2> See Your Results Here</h2>
+</div>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>Testing Id</th>>
+        <th> Policy Name</th>
+        <th> Risk id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="show : ${showRe}">
+        <td th:height="50px" th:width="400px" th:text="${show.testing_id}">Testing Id</td>>
+        <td th:height="50px" th:width="400px" th:text="${show.policy_name}">Policy Name</td>
+        <td th:width="400px" th:height="50px" th:text="${show.risk_id}">Risk id</td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

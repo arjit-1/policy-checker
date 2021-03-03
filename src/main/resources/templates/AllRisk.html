@@ -6,6 +6,18 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        table, th, td{
+            border: 1px solid #666;
+        }
+        table th, table td{
+            padding: 10px;
+        }
+        .row_name{
+            background-color: aqua;
+        }
+    </style>
 </head>
 <body>
 <div class="container text-center">
@@ -17,13 +29,13 @@
 <table>
     <thead>
     <tr>
-        <th> Risk Id</th>
-        <th>Risk Title</th>
+        <th class="row_name"> Risk Id</th>
+        <th class="row_name">Risk Title</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="getRisk : ${getAllRisk}">
-        <td th:height="50px" th:width="400px" th:text="${getRisk.risk_id}">Risk Id   </td>
+        <td th:height="50px" th:width="400px" th:text="${getRisk.risk_id}">Risk Id</td>
         <td th:width="400px" th:height="50px" th:text="${getRisk.risk_title}">Risk Title</td>
     </tr>
     </tbody>

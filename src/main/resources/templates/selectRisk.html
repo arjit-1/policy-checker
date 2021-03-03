@@ -19,7 +19,7 @@
         <div style="padding: 5%">
         <div class="form-group row">
             <label>Policy Name </label>
-            <input type="text" class="form-control" th:field="*{policy_name}"/>
+            <input type="text" class="form-control" th:field="*{policy_name}" required/>
         </div>
 
             <h3 th:text="|List Of Risks for : ${addPresentRisk.user_name}|"></h3>

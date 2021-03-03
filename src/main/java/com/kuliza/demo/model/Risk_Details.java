@@ -1,6 +1,7 @@
 package com.kuliza.demo.model;
 
 import com.kuliza.demo.model.userDetails;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ public class Risk_Details {
     private Long risk_id;
 
     @Column(name="risk_title")
+    @NonNull
     private String risk_title;
 
     @Column(name="risk_keyword")

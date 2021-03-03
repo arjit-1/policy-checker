@@ -1,5 +1,7 @@
 package com.kuliza.demo.model;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -9,6 +11,7 @@ public class UserPolicy {
 
     @Id
     @Column(name="policy_name")
+    @NonNull
     private String policy_name;
 
     @Column(name="user_name")

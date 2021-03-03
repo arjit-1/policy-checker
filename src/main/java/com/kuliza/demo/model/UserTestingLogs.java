@@ -16,7 +16,7 @@ public class UserTestingLogs {
     private String policy_name;
 
     @Column(name="risk_id")
-    private Long risk_id;
+    private String risk_id;
 
     @Column(name="date")
     private String date;
@@ -40,11 +40,11 @@ public class UserTestingLogs {
         this.policy_name = policy_name;
     }
 
-    public Long getRisk_id() {
+    public String getRisk_id() {
         return risk_id;
     }
 
-    public void setRisk_id(Long risk_id) {
+    public void setRisk_id(String risk_id) {
         this.risk_id = risk_id;
     }
 
