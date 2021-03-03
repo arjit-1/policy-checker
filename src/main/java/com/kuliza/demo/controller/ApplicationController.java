@@ -2,6 +2,7 @@ package com.kuliza.demo.controller;
 
 import com.kuliza.demo.model.*;
 import com.kuliza.demo.repository.*;
+import com.kuliza.demo.service.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -73,6 +76,7 @@ public class ApplicationController {
                     AFTER SUCCESSFUL REGISTRATION.....
              */
 
+            public  String uploadDirectory ="";
             @PostMapping("/processRegister")
             public String registerSuccessfull(userDetails userdetails)
 
@@ -81,7 +85,36 @@ public class ApplicationController {
                       String newPassword = encoder.encode(userdetails.getUser_password());
                       userdetails.setUser_password(newPassword);
                       repo.save(userdetails);
+                      CustomUserDetails cud=new CustomUserDetails(userdetails);
+                      String userName=""+cud.getUsername();
+
+                      String path="/home/kuliza-568/Downloads/demo/uploads";
+                      File file=new File(path);
+                      if(!file.exists())
+                      {
+                         if(file.mkdir()) uploadDirectory=uploadDirectory+"/"+createSubDirectory(path, userName);
+                      }
+                      else
+                      {
+                          System.out.println("Check");
+                          uploadDirectory=uploadDirectory+"/"+createSubDirectory(path,userName);
+                      }
+
                       return "registerSuccesfully";
+            }
+
+            public  String createSubDirectory(String path,String userName)
+            {
+                path=path+"/"+userName;
+                File file=new File(path);
+                if(!file.exists())
+                {
+                    if(file.mkdirs())
+                    {
+                        System.out.println("SubDirectoryCreated");
+                    }
+                }
+                return path;
             }
 
             /*
@@ -173,9 +206,6 @@ public class ApplicationController {
                 /*
                         SENDING THE MAIL TO THE ADMIN .................................
                  */
-
-                public static String uploadDirectory = System.getProperty("user.dir")+"/uploads";
-
                 @RequestMapping("/takeInput")
                 public String takeUserInput(Model model)
                 {
@@ -208,10 +238,13 @@ public class ApplicationController {
 
                 @RequestMapping("/upload")
                 public String upload(Model model,@RequestParam("files") MultipartFile[] files,@AuthenticationPrincipal UserDetails ud) {
+                        if(uploadDirectory.equals(""))uploadDirectory=uploadDirectory+"/home/kuliza-568/Downloads/demo/uploads"+"/"+ud.getUsername();
+                    System.out.println("THis is the uploaded directory"+uploadDirectory);
+//                    uploadDirectory=uploadDirectory+"/"+ud.getUsername();
                     StringBuilder fileNames = new StringBuilder();
                     for (MultipartFile file : files) {
                         Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
-                        fileNames.append(file.getOriginalFilename()+ud.getUsername());
+                        fileNames.append(file.getOriginalFilename());
                         try {
                             Files.write(fileNameAndPath, file.getBytes());
                         } catch (IOException e) {
