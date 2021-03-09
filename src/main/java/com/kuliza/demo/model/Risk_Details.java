@@ -6,28 +6,28 @@ import org.springframework.lang.NonNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name="risk_details")
+@Table(name = "risk_details")
 public class Risk_Details {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="risk_id")
+    @Column(name = "risk_id")
     private Long risk_id;
 
-    @Column(name="risk_title")
+    @Column(name = "risk_title")
     @NonNull
     private String risk_title;
 
-    @Column(name="risk_keyword")
+    @Column(name = "risk_keyword")
     private String risk_keyword;
 
-    @Column(name="risk_regex")
+    @Column(name = "risk_regex")
     private String risk_regex;
 
-    @Column(name="risk_desc")
+    @Column(name = "risk_desc")
     private String risk_Description;
 
-    @Column(name="match_count")
+    @Column(name = "match_count")
     int match_count;
 
 //    @Column(name="user_name")
@@ -37,8 +37,8 @@ public class Risk_Details {
 //        return user_name;
 //    }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_name",referencedColumnName = "user_name")
+    @ManyToOne
+    @JoinColumn(name = "user_name", referencedColumnName = "user_name")
     userDetails user;
 
     public userDetails getUser() {
@@ -48,11 +48,7 @@ public class Risk_Details {
     public void setUser(userDetails user) {
         this.user = user;
     }
-
-//    public void setUser_name(String user_name) {
-//        this.user_name = user_name;
-//    }
-
+    
     public Risk_Details() {
 
     }
@@ -114,7 +110,6 @@ public class Risk_Details {
     public void setMatch_count(int match_count) {
         this.match_count = match_count;
     }
-
 
 
 }

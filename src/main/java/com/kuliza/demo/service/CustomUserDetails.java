@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-//  INSTANCE OF THE USERDETAILS ENTITY CLASS......................
+    //  INSTANCE OF THE USERDETAILS ENTITY CLASS......................
     private userDetails userdetails;
 
     //CONSTRUTOR OF THE CUSTOMUSERDETAILS CLASS.......................
@@ -52,5 +52,7 @@ public class CustomUserDetails implements UserDetails {
     }
 
 
-    public userDetails giveUserDetail(){return userdetails;}
+    public userDetails giveUserDetail() {
+        return userdetails;
+    }
 }

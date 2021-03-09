@@ -13,28 +13,28 @@
 
     <form th:action="@{/processRegister}" method="post"
           th:object="${user}">
-    <div >
+        <div>
             <div class="form-group row" style="margin-bottom: 10%">
                 <label>E-Mail </label>
                 <input type="email" class="form-control" th:field="*{user_email}" required/>
             </div>
 
-        <div class="form-group row" style="margin-bottom: 10%">
-            <label>User Name</label>
-            <input type="text" class="form-control" th:field="*{user_name}"  required/>
-        </div>
+            <div class="form-group row" style="margin-bottom: 10%">
+                <label>User Name</label>
+                <input type="text" class="form-control" th:field="*{user_name}" required/>
+            </div>
 
-        <div class="form-group row" style="margin-bottom: 10%">
-            <label>Password</label>
-            <input type="password" class="form-control"  th:field="*{user_password}"  required/>
-        </div>
+            <div class="form-group row" style="margin-bottom: 10%">
+                <label>Password</label>
+                <input type="password" class="form-control" th:field="*{user_password}" required/>
+            </div>
 
-        <div style="display: flex;flex-direction: column;align-items: center;align-content: center">
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </div>
+            <div style="display: flex;flex-direction: column;align-items: center;align-content: center">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
 
-    </div>
-        </form>
+        </div>
+    </form>
 </div>
 
 </body>

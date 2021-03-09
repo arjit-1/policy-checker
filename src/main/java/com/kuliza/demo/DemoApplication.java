@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import java.io.File;
 
 @SpringBootApplication
-@EntityScan(basePackages = "com.kuliza.demo")
+
 public class DemoApplication {
 
     public static void main(String[] args) {

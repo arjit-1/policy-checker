@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>See Risk</title>
+    <title>All Policy</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -24,29 +24,27 @@
 <body>
 <div class="container text-center">
     <h1>Welcome User !!</h1>
-    <h2> See Your Risk Here</h2>
+    <h2>Complete Policy Details Shown Below</h2>
 </div>
-
 <div style="display:flex;flex-direction: column;padding: 80px">
     <table>
         <thead>
         <tr>
-            <th class="row_name"> Risk Id</th>
-            <th class="row_name">Risk Title</th>
+            <th class="row_name">Row Id</th>
+            <th class="row_name">Policy Name</th>
+            <th class="row_name">Risk Id</th>
+
         </tr>
         </thead>
         <tbody>
-        <tr th:each="getRisk : ${getAllRisk}">
-            <td th:height="50px" th:width="400px" th:text="${getRisk.risk_id}">Risk Id</td>
-            <td th:width="400px" th:height="50px" th:text="${getRisk.risk_title}">Risk Title</td>
-
-            <td>
-                <a th:href="@{/viewDetailedRiskInformation/{id}(id=${getRisk.risk_id})}">Details</a>
-                <a th:href="@{/deleteRisk/{id}(id=${getRisk.risk_id})}">Delete</a>
-            </td>
+        <tr th:each="sd : ${showDetail}">
+            <td th:height="50px" th:width="400px" th:text="${sd.row_id}">nnk</td>
+            <td th:width="400px" th:height="50px" th:text="${sd.policy_name}"></td>
+            <td th:width="400px" th:height="50px" th:text="${sd.risk_id}"></td>
         </tr>
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

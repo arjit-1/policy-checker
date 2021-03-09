@@ -3,24 +3,24 @@ package com.kuliza.demo.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="upload_doc_logs")
+@Table(name = "upload_doc_logs")
 public class UploadDocLogs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="session_id")
+    @Column(name = "session_id")
     private Long session_id;
 
-    @Column(name="doc_name")
+    @Column(name = "doc_name")
     private String doc_name;
 
-    @Column(name="date")
+    @Column(name = "date")
     private String date;
 
-    @Column(name="time")
+    @Column(name = "time")
     private String time;
 
-    @Column(name="user_name")
+    @Column(name = "user_name")
     private String user_name;
 
 

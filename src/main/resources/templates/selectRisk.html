@@ -1,57 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="ISO-8859-1">
     <title>Add Risk</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="container text-center">
-    <h1>Welcome User !!</h1>
-    <h2> Add your Risk Here</h2>
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1 class="display-4">Welcome User !!</h1>
+        <p class="lead">Add your Risk Here</p>
+    </div>
 </div>
 
-<form class ="ui form " th:action="@{/policyAddSuccesfully}" method="post"
-        th:object="${addPresentRisk}">
-
-        <div style="padding: 5%">
-        <div class="form-group row">
+<form  style="margin:5%" th:action="@{/policyAddSuccesfully}" method="post"
+      th:object="${addPresentRisk}" >
+        <div class="form-group">
             <label>Policy Name </label>
             <input type="text" class="form-control" th:field="*{policy_name}" required/>
         </div>
+        <div class="form-group">
+        <h3 th:text="|List Of Risks for : ${addPresentRisk.user_name}|"></h3>
 
-            <h3 th:text="|List Of Risks for : ${addPresentRisk.user_name}|"></h3>
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="risk : ${getRisk}">
-                    <td th:text="${risk.risk_id}">Id</td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
-
-    <div class="form-group row" style="padding: 5%">
-        <label>Add Risk </label>
-        <input type="text" class="form-control" th:field="*{risk_Data}"/>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="risk : ${getRisk}">
+                <td th:text="${risk.risk_id}">Id</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+       <div th:object="${addRiskData}" >
+           <label>Add Risk </label>
+           <input type="text" class="form-control" th:field="*{riskData}"/>
+       </div>
 
-    <div >
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+       <div class="form-group">
+           <button  type="submit" class="btn btn-primary">Submit</button>
+       </div>
 </form>
-
-
-
 
 
 </body>

@@ -6,21 +6,21 @@ import java.util.List;
 
 
 @Entity
-@Table(name="user_details")
+@Table(name = "user_details")
 public class userDetails {
 
-     @Id
-     @Column(name="user_name")
-     private String user_name;
+    @Id
+    @Column(name = "user_name")
+    private String user_name;
 
-     @Column(name="user_email")
-     private String user_email;
+    @Column(name = "user_email")
+    private String user_email;
 
-     @Column(name="user_password")
-     private String user_password;
+    @Column(name = "user_password")
+    private String user_password;
 
-     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-     List<Risk_Details> riskDetails=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    List<Risk_Details> riskDetails = new ArrayList<>();
 
     public String getUser_name() {
         return user_name;

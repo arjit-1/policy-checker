@@ -3,10 +3,26 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Show Results</title>
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid #666;
+        }
+
+        table th, table td {
+            padding: 10px;
+        }
+
+        .row_name {
+            background-color: aqua;
+        }
+    </style>
 </head>
+
+
 <body>
 <div class="container text-center">
     <h1>Welcome User !!</h1>
@@ -17,16 +33,23 @@
 <table>
     <thead>
     <tr>
-        <th>Testing Id</th>>
+
         <th> Policy Name</th>
         <th> Risk id</th>
+        <th> Time </th>
+        <th> Date </th>
+        <th> User Name</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="show : ${showRe}">
-        <td th:height="50px" th:width="400px" th:text="${show.testing_id}">Testing Id</td>>
-        <td th:height="50px" th:width="400px" th:text="${show.policy_name}">Policy Name</td>
-        <td th:width="400px" th:height="50px" th:text="${show.risk_id}">Risk id</td>
+    <tr th:each="show : ${getViolatedDetails}">
+        <td th:height="50px" th:width="400px" th:text="${show.policy_name}">Policy Id</td>
+        <td th:height="50px" th:width="400px" th:text="${show.risk_id}">Risk Id</td>
+        <td th:height="50px" th:width="400px" th:text="${show.time}">time</td>
+        <td th:height="50px" th:width="400px" th:text="${show.date}">Date</td>
+        <td th:height="50px" th:width="400px" th:text="${show.user_name}">User Name</td>
+
+
 
     </tr>
     </tbody>

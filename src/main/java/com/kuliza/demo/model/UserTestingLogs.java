@@ -4,25 +4,36 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="user_testing_logs")
+@Table(name = "user_testing_logs")
 public class UserTestingLogs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="testing_id")
+    @Column(name = "testing_id")
     private Long testing_id;
 
-    @Column(name="policy_name")
+    @Column(name = "policy_name")
     private String policy_name;
 
-    @Column(name="risk_id")
+    @Column(name = "risk_id")
     private String risk_id;
 
-    @Column(name="date")
+    @Column(name = "date")
     private String date;
 
-    @Column(name="time")
+    @Column(name = "time")
     private String time;
+
+    @Column(name="user_name")
+    private String user_name;
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
 
     public Long getTesting_id() {
         return testing_id;

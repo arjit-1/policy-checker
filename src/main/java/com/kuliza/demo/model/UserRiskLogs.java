@@ -4,24 +4,24 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="user_risk_logs")
+@Table(name = "user_risk_logs")
 public class UserRiskLogs {
 
     @Id
-    @Column(name="session_id")
+    @Column(name = "session_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long session_id;
 
-    @Column(name="date")
+    @Column(name = "date")
     private String date;
 
-    @Column(name="time")
+    @Column(name = "time")
     private String time;
 
-    @Column(name="risk_id")
+    @Column(name = "risk_id")
     private Long risk_id;
 
-    @Column(name="risk_title")
+    @Column(name = "risk_title")
     private String risk_title;
 
     public Long getSession_id() {

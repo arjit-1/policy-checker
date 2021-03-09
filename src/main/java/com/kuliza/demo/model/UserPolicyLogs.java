@@ -3,23 +3,23 @@ package com.kuliza.demo.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user_policy_logs")
+@Table(name = "user_policy_logs")
 public class UserPolicyLogs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long session_id;
 
-    @Column(name="date")
+    @Column(name = "date")
     private String date;
 
     @Column
     private String time;
 
-    @Column(name="policy_name")
+    @Column(name = "policy_name")
     private String policy_name;
 
-    @Column(name="risk_acc")
+    @Column(name = "risk_acc")
     private String risk_acc;
 
     public String getPolicy_name() {
