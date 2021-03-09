@@ -14,9 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -178,16 +176,5 @@ public class newCon {
         }
         System.out.println("Program Ended");
     }
-
-    public void match()
-    {
-        List<UserPolicy>up=policyRepo.getEveryPolicy(user_name);
-
-
-    }
-
-    @Autowired
-    UserPolicyRepository userPolicyRepository;
-
 }
 
