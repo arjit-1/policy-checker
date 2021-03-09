@@ -288,7 +288,7 @@ public class ApplicationController {
     @RequestMapping("/deleteRisk/{id}")
     public String deleteRisk(Model model, Risk_Details rd,@PathVariable(value="id")Long id) {
         List<Risk_Policy> listRiskPolicy=risk_policyRepository.fetchPolicyName(id);
-        risk_policyRepository.deleteById(id);
+        risk_policyRepository.deleteId(id);
         riskRepo.deleteById(id);
         for(Risk_Policy rp:listRiskPolicy)
         {
