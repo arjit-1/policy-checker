@@ -84,7 +84,7 @@ public class ApplicationController {
                     AFTER SUCCESSFUL REGISTRATION.....
              */
 
-    public String uploadDirectory = "";
+    //public String uploadDirectory = "";
 
     @PostMapping("/processRegister")
     public String registerSuccessfull(userDetails userdetails) {
@@ -92,17 +92,24 @@ public class ApplicationController {
         String newPassword = encoder.encode(userdetails.getUser_password());
         userdetails.setUser_password(newPassword);
         repo.save(userdetails);
-        CustomUserDetails cud = new CustomUserDetails(userdetails);
-        String userName = "" + cud.getUsername();
+//         CustomUserDetails cud = new CustomUserDetails(userdetails);
+//         String userName = "" + cud.getUsername();
 
-        String path = "/home/kuliza-568/Downloads/demo/uploads";
-        File file = new File(path);
-        if (!file.exists()) {
-            if (file.mkdir()) uploadDirectory = uploadDirectory + "/" + createSubDirectory(path, userName);
-        } else {
-            System.out.println("Check");
-            uploadDirectory = uploadDirectory + "/" + createSubDirectory(path, userName);
-        }
+//         String path = "/home/kuliza-568/Downloads/demo/uploads";
+//         File file = new File(path);
+//         if (!file.exists()) {
+//             if (file.mkdir()) uploadDirectory = uploadDirectory + "/" + createSubDirectory(path, userName);
+//         } else {
+//             System.out.println("Check");
+//             uploadDirectory = uploadDirectory + "/" + createSubDirectory(path, userName);
+//         }
+        final File TEMP_DIRECTORY = new File(System.getProperty("user.dir")+"/uploads");
+        String dir=userdetails.getUser_name();
+        File newDirectory = new File(TEMP_DIRECTORY, dir);
+        System.out.println(newDirectory.exists());
+        if(!newDirectory.exists());
+        newDirectory.mkdir();
+
 
         return "registerSuccesfully";
     }
@@ -244,13 +251,23 @@ public class ApplicationController {
         model.addAttribute("getAllPolicy", listPolicy);
         return "AllPolicies";
     }
+    
+    
+    public static String uploadDirectory= System.getProperty("user.dir")+"/uploads";
 
     @RequestMapping("/upload")
     public String upload(Model model, @RequestParam("files") MultipartFile[] files, @AuthenticationPrincipal UserDetails ud) {
-        if (uploadDirectory.equals(""))
-            uploadDirectory = uploadDirectory + "/home/kuliza-568/Downloads/demo/uploads" + "/" + ud.getUsername();
-//                    uploadDirectory=uploadDirectory+"/"+ud.getUsername();
+//         if (uploadDirectory.equals(""))
+//             uploadDirectory = uploadDirectory + "/home/kuliza-568/Downloads/demo/uploads" + "/" + ud.getUsername();
+// //                    uploadDirectory=uploadDirectory+"/"+ud.getUsername();
+        
+        
+        
+        String name=ud.getUsername();
+        uploadDirectory=uploadDirectory+"/"+name;
+        System.out.println(uploadDirectory);
         StringBuilder fileNames = new StringBuilder();
+        
         for (MultipartFile file : files) {
             Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
             fileNames.append(file.getOriginalFilename());
