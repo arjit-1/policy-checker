@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" style="height: 100%">
 <head>
     <meta charset="ISO-8859-1">
     <title>See Policies</title>
@@ -22,26 +22,30 @@
         }
     </style>
 </head>
-<body>
-<div class="jumbotron jumbotron-fluid text-center">
+<body style="height: 100%;display: flex;flex-direction: column;align-items: center">
+<div class="jumbotron jumbotron-fluid text-center" style="width: 100%">
     <div class="container">
         <h1 class="display-4">Welcome User !!</h1>
         <p class="lead">See Your Policies Here</p>
     </div>
 </div>
 
-<div style="display: flex;flex-direction: column">
+<div style="border:2px black solid;width:80%;display: flex;flex-direction: column">
 <table>
     <thead>
     <tr>
+        <th class="row_name">Serial No.</th>
         <th class="row_name"> Policy Name</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="getPolicy : ${getAllPolicy}">
+    <tr th:each="getPolicy,iter : ${getAllPolicy}">
+        <td th:height="50px" th:width="400px" th:text="${iter.count}">Serial No.</td>
         <td th:height="50px" th:width="400px" th:text="${getPolicy.policy_name}">Risk Id</td>
         <td>
+
             <a th:href="@{/viewDetailedPolicyInformation/{name}(name=${getPolicy.policy_name})}">Details</a>
+            <a th:href="@{/deletePolicy/{name}(name=${getPolicy.policy_name})}">Delete</a>
         </td>
     </tr>
     </tbody>

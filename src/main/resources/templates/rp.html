@@ -14,7 +14,7 @@
 <body style="height: 100%;display: flex;flex-direction: column;">
 <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">
-        <h1 class="display-4">Welcome User !!</h1>
+        <label class="display-4" th:text="'Hello' +' '+ ${name}"></label>
         <p class="lead">Choose your Action</p>
     </div>
 </div>

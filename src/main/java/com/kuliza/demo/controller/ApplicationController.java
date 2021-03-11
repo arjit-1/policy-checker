@@ -21,7 +21,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ApplicationController {
@@ -68,6 +67,11 @@ public class ApplicationController {
                     FOR REGISTRATION..........
               */
 
+    @RequestMapping("/logoutS")
+    public String logo()
+    {
+        return "index";
+    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -119,7 +123,9 @@ public class ApplicationController {
              */
 
     @GetMapping("/risk_policy")
-    public String addRiskPolicy() {
+    public String addRiskPolicy(Model model,@AuthenticationPrincipal UserDetails ud)
+    {
+        model.addAttribute("name",ud.getUsername());
         return "rp";
     }
 
@@ -127,16 +133,12 @@ public class ApplicationController {
                     ADDING THE RISK ..................
              */
 
-    @RequestMapping("/logoutS")
-    public String logoutSuccess()
-    {
-        return "index";
-    }
 
     @GetMapping("/risk")
-    public String addRiskDetails(Model model) {
+    public String addRiskDetails(Model model,@AuthenticationPrincipal UserDetails ud) {
         Risk_Details rd = new Risk_Details();
         model.addAttribute("riskObj", rd);
+        model.addAttribute("name",ud.getUsername());
         return "addRisk";
     }
 
@@ -286,7 +288,7 @@ public class ApplicationController {
     }
 
     @RequestMapping("/deleteRisk/{id}")
-    public String deleteRisk(Model model, Risk_Details rd,@PathVariable(value="id")Long id) {
+    public String deleteRisk(@PathVariable(value="id")Long id) {
         List<Risk_Policy> listRiskPolicy=risk_policyRepository.fetchPolicyName(id);
         risk_policyRepository.deleteId(id);
         riskRepo.deleteById(id);
@@ -297,6 +299,14 @@ public class ApplicationController {
                 policyRepo.deletebyName(rp.getPolicy_name());
             }
         }
+        return "rp";
+    }
+
+    @RequestMapping("/deletePolicy/{name}")
+    public String deletePolicy(@PathVariable(value="name") String name)
+    {
+        policyRepo.deletebyName(name);
+        risk_policyRepository.deleteName(name);
         return "rp";
     }
 

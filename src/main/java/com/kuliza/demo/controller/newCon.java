@@ -7,6 +7,7 @@ import com.kuliza.demo.model.UserPolicy;
 import com.kuliza.demo.model.UserTestingLogs;
 import com.kuliza.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -92,18 +93,16 @@ public class newCon {
                     }
                     br.close();
 
-                    System.out.println(".......");
-                    System.out.println("Content of the testing docuement ");
+                    System.out.println("...................");
+                    System.out.println("Content of the testing document ");
                     List<String> words = Arrays.asList(str1.split(" "));
                     for (String s : words) System.out.println(s);
-                    System.out.println(".......");
+                    System.out.println("...................");
 
                     map.clear();
                     for (String s : words) {
                         map.put(s, map.getOrDefault(s, 0) + 1);
                     }
-                    System.out.println(map);
-
 
                     List<UserPolicy> listPolicy = policyRepo.getEveryPolicy(user_name);
 
@@ -115,8 +114,6 @@ public class newCon {
                         {
                             riskId.add(rp.getRisk_id());
                         }
-//                        if (getRisk.length() == 0) continue;
-//                        List<String> seperatedRisk = Arrays.asList(getRisk.split(","));
                         for (Long i : riskId)
                         {
                             List<Risk_Details> getKeyWords = riskRepo.findAllKeyWords(i);

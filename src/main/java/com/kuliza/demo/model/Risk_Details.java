@@ -1,6 +1,5 @@
 package com.kuliza.demo.model;
 
-import com.kuliza.demo.model.userDetails;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -29,13 +28,6 @@ public class Risk_Details {
 
     @Column(name = "match_count")
     int match_count;
-
-//    @Column(name="user_name")
-//    private String user_name;
-//
-//    public String getUser_name() {
-//        return user_name;
-//    }
 
     @ManyToOne
     @JoinColumn(name = "user_name", referencedColumnName = "user_name")

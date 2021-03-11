@@ -3,6 +3,8 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>See Risk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -27,16 +29,21 @@
     <h2> See Your Risk Here</h2>
 </div>
 
-<div style="display:flex;flex-direction: column;padding: 80px">
+<div style="display:flex;flex-direction: column;padding: 5%">
+    <div style="margin-bottom: 1%">
+        <a class="btn btn-primary btn-lg" th:href="@{/risk_policy}">Main Menu</a>
+    </div>
     <table>
         <thead>
         <tr>
+            <th class="row_name">Serial No. 11</th>
             <th class="row_name"> Risk Id</th>
             <th class="row_name">Risk Title</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="getRisk : ${getAllRisk}">
+        <tr th:each="getRisk,iter : ${getAllRisk}">
+            <td th:height="50px" th:width="400px" th:text="${iter.count}">Serial No</td>
             <td th:height="50px" th:width="400px" th:text="${getRisk.risk_id}">Risk Id</td>
             <td th:width="400px" th:height="50px" th:text="${getRisk.risk_title}">Risk Title</td>
 
